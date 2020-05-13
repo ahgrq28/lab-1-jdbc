@@ -1,11 +1,16 @@
 package com.luxoft.springdb.lab1.model;
 
+import javax.persistence.*;
 import java.io.Serializable;
 
+@Entity
+@Table(name = "country")
 public class Country implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 
     private String name;
