@@ -1,34 +1,25 @@
-package com.luxoft.springdb.lab1.model;
+package com.luxoft.springdb.lab1.rest;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import java.io.Serializable;
+import com.luxoft.springdb.lab1.model.Country;
 
-@Entity
-public class Country implements Serializable{
+public class CountryDto {
 
-	private static final long serialVersionUID = 1L;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+    private Integer id;
 
     private String name;
 
     private String codeName;
 
-    public Country() {
+    public CountryDto() {
     }
 
-    public Country(int id, String name, String codeName) {
+    public CountryDto(int id, String name, String codeName) {
         this.id = id;
         this.name = name;
         this.codeName = codeName;
     }
 
-    public Country(String name, String codeName) {
+    public CountryDto(String name, String codeName) {
         this.name = name;
         this.codeName = codeName;
     }
@@ -65,7 +56,7 @@ public class Country implements Serializable{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Country country = (Country) o;
+        CountryDto country = (CountryDto) o;
 
         if (codeName != null ? !codeName.equals(country.codeName) : country.codeName != null) return false;
         if (name != null ? !name.equals(country.name) : country.name != null) return false;
@@ -78,5 +69,16 @@ public class Country implements Serializable{
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (codeName != null ? codeName.hashCode() : 0);
         return result;
+    }
+
+    public static Country toDomainObject(CountryDto dto) {
+        if(dto.getId() != null) {
+            return new Country(dto.getId(), dto.getName(), dto.getCodeName());
+        }
+        return new Country(dto.getName(), dto.getCodeName());
+    }
+
+    public static CountryDto toDto(Country country) {
+        return new CountryDto(country.getId(), country.getName(), country.getCodeName());
     }
 }

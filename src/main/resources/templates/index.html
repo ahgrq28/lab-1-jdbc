@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Spring Boot Thymeleaf Hello World Example</title>
+
+    <link rel="stylesheet" th:href="@{webjars/bootstrap/4.2.1/css/bootstrap.min.css}"/>
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+    <a class="navbar-brand" href="#">Luxoft.com</a>
+</nav>
+
+<main role="main" class="container">
+
+    <div class="countries-table">
+        <h1>Список стран</h1>
+        <h2>
+            <a href="/country/create">Добавить страну</a>
+            <br/><br/>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Название</th>
+                    <th scope="col">Код</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each ="country : ${countrys}">
+                    <th scope="row" th:utext="${country.id}">1</th>
+                    <td th:utext="${country.name}">Russia</td>
+                    <td th:utext="${country.codeName}">RU</td>
+                    <td>
+                        <a type="button" class="btn btn-success" th:href="@{/country/update/{id}(id=${country.id})}">Изменить</a>
+                        <a type="button" class="btn btn-warning" th:href="@{/country/del/{id}(id=${country.id})}">Удалить</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </h2>
+    </div>
+
+</main>
+<!-- /.container -->
+
+<script type="text/javascript" th:src="@{webjars/bootstrap/4.2.1/js/bootstrap.min.js}"></script>
+</body>
+</html>

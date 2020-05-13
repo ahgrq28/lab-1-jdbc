@@ -17,6 +17,10 @@ public interface CountryRepository extends JpaRepository<Country, Integer> {
     @Query("update Country c set c.name = :name where c.codeName = :codeName")
     void updateCountryNameByCodeName(String name, String codeName);
 
+    @Modifying
+    @Query("update Country c set c.name = :name, c.codeName = :codeName where c.id = :id")
+    void updateCountryById(String name, String codeName, Integer id);
+
     @Query("Select c from Country c where c.name like %:name%")
     List<Country> retrieveCountryByName(String name);
 }
